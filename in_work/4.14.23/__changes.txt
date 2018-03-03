@@ -5,3 +5,42 @@ Remove 06_pte_frag patch
 
 change /arch/powerpc/sysdev/ppc4xx_ocm.c to /arch/powerpc/platforms/4xx/ocm.c
 in 02_ppc4xx_ocm_enable.patch
+
+
+
+---- Errors fixed manually ----
+
+./include/linux/stddef.h:8:14: error: expected declaration specifiers or ‘...’ before ‘(’ token
+ #define NULL ((void *)0)
+              ^
+./include/linux/leds.h:156:35: note: in expansion of macro ‘NULL’
+  of_led_classdev_register(parent, NULL, led_cdev)
+                                   ^~~~
+drivers/leds/led-class-3g.c:414:5: note: in expansion of macro ‘led_classdev_register’
+ int led_classdev_register(struct device *parent, struct led_classdev *led_cdev)
+     ^~~~~~~~~~~~~~~~~~~~~
+In file included from ./include/linux/linkage.h:7:0,
+                 from ./include/linux/kernel.h:7,
+                 from ./include/linux/list.h:9,
+                 from ./include/linux/module.h:9,
+                 from drivers/leds/led-class-3g.c:15:
+drivers/leds/led-class-3g.c:473:19: error: ‘led_classdev_register’ undeclared here (not in a function)
+ EXPORT_SYMBOL_GPL(led_classdev_register);
+--------------> need to extern int led_classdev_register in /include/linux/leds.h <--------------
+
+
+make[4]: *** Waiting for unfinished jobs....
+drivers/leds/leds-apollo3g.c: In function ‘a3g_led_blink_thread’:
+drivers/leds/leds-apollo3g.c:257:11: error: variable ‘param’ has initializer but incomplete type
+    struct sched_param param = { .sched_priority = 1};
+           ^~~~~~~~~~~
+drivers/leds/leds-apollo3g.c:257:33: error: unknown field ‘sched_priority’ specified in initializer
+    struct sched_param param = { .sched_priority = 1};
+                                 ^
+drivers/leds/leds-apollo3g.c:257:51: warning: excess elements in struct initializer
+    struct sched_param param = { .sched_priority = 1};
+                                                   ^
+drivers/leds/leds-apollo3g.c:257:51: note: (near initialization for ‘param’)
+drivers/leds/leds-apollo3g.c:257:23: error: storage size of ‘param’ isn’t known
+    struct sched_param param = { .sched_priority = 1};
+--------------> need to add #include <uapi/linux/sched/types.h> to drivers/leds/leds-apollo3g.c <--------------
