@@ -1040,8 +1040,8 @@ diff -urN linux-4.0.1/drivers/leds/Makefile linux-4.0.1-wd1/drivers/leds/Makefil
  obj-$(CONFIG_LEDS_DAC124S085)		+= leds-dac124s085.o
  
 diff -urN linux-4.0.1/include/linux/leds.h linux-4.0.1-wd1/include/linux/leds.h
---- include/linux/leds.h	2015-04-29 11:22:30.000000000 +0300
-+++ include/linux/leds.h	2015-05-02 17:35:27.099690732 +0300
+--- linux-4.0.1/include/linux/leds.h	2015-04-29 11:22:30.000000000 +0300
++++ linux-4.0.1-wd1/include/linux/leds.h	2015-05-02 17:35:27.099690732 +0300
 @@ -26,6 +26,17 @@
  enum led_brightness {
  	LED_OFF		= 0,
