@@ -1,0 +1,22 @@
+https://lists.ozlabs.org/pipermail/linuxppc-dev/2017-September/164096.html
+Signed-off-by: Christian Lamparter <chunkeey at googlemail.com>
+---
+ arch/powerpc/kernel/setup-common.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/arch/powerpc/kernel/setup-common.c b/arch/powerpc/kernel/setup-common.c
+index 0ac741fae90e..4a22ec6b34de 100644
+--- a/arch/powerpc/kernel/setup-common.c
++++ b/arch/powerpc/kernel/setup-common.c
+@@ -904,7 +904,8 @@ void __init setup_arch(char **cmdline_p)
+ #endif
+ #endif
+ 
+-#ifdef CONFIG_PPC_64K_PAGES
++#if defined(CONFIG_PPC_64K_PAGES) && \
++    (defined(CONFIG_PPC_BOOK3S_64) || defined(CONFIG_PPC_BOOK3E_MMU))
+ 	init_mm.context.pte_frag = NULL;
+ #endif
+ #ifdef CONFIG_SPAPR_TCE_IOMMU
+-- 
+2.14.2
