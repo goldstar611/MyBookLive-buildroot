@@ -1,0 +1,7 @@
+fix leds.h failed hunk patch error
+TODO: from patch-utils, use rediff to fix up offsets
+
+Remove 06_pte_frag patch
+
+change /arch/powerpc/sysdev/ppc4xx_ocm.c to /arch/powerpc/platforms/4xx/ocm.c
+in 02_ppc4xx_ocm_enable.patch
