@@ -7,8 +7,6 @@ The latest WD My Book Live GPL Source Code can be found at https://support.wdc.c
     # Install some dependencies to get started (taken from sample vagrant file)
     sudo apt update
     sudo apt install build-essential libncurses5-dev git libc6:i386 unzip bc
-    sudo apt autoremove
-    sudo apt clean
 
     # Clone the master buildroot and MyBookLive-buildroot repos
     git clone https://github.com/buildroot/buildroot.git
@@ -19,7 +17,7 @@ The latest WD My Book Live GPL Source Code can be found at https://support.wdc.c
     cp -R MyBookLive-buildroot/board/* buildroot/board
 
     # Get additional dependencies for make gconfig
-    sudo apt-get install libgtk2.0-dev libglib2.0-dev libglade2-dev
+    sudo apt install libgtk2.0-dev libglib2.0-dev libglade2-dev
 
     # Load the default configuration for the MyBookLive (A PowerPC 446 architecture)
     cd buildroot
