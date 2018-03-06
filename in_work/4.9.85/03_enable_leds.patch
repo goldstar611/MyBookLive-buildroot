@@ -1,6 +1,6 @@
-diff -urN linux-4.0.1/arch/powerpc/platforms/44x/apollo3g-gpio.c linux-4.0.1-wd1/arch/powerpc/platforms/44x/apollo3g-gpio.c
---- linux-4.0.1/arch/powerpc/platforms/44x/apollo3g-gpio.c	1970-01-01 03:00:00.000000000 +0300
-+++ linux-4.0.1-wd1/arch/powerpc/platforms/44x/apollo3g-gpio.c	2015-03-29 21:02:00.000000000 +0300
+diff -ruN linux-vanilla-4.9.86/arch/powerpc/platforms/44x/apollo3g-gpio.c linux-4.9.86/arch/powerpc/platforms/44x/apollo3g-gpio.c
+--- linux-vanilla-4.9.86/arch/powerpc/platforms/44x/apollo3g-gpio.c	1969-12-31 18:00:00.000000000 -0600
++++ linux-4.9.86/arch/powerpc/platforms/44x/apollo3g-gpio.c	2018-03-05 10:25:56.729609916 -0600
 @@ -0,0 +1,75 @@
 +/*
 + * (c) Copyright 2010 Western Digital Technologies, Inc.  All Rights Reserved.
@@ -77,9 +77,9 @@ diff -urN linux-4.0.1/arch/powerpc/platforms/44x/apollo3g-gpio.c linux-4.0.1-wd1
 +	return platform_driver_register(&apollo3g_gpio_driver);
 +}
 +device_initcall(apollo3g_gpio_init);
-diff -urN linux-4.0.1/arch/powerpc/platforms/44x/Makefile linux-4.0.1-wd1/arch/powerpc/platforms/44x/Makefile
---- linux-4.0.1/arch/powerpc/platforms/44x/Makefile	2015-04-29 11:22:30.000000000 +0300
-+++ linux-4.0.1-wd1/arch/powerpc/platforms/44x/Makefile	2015-05-02 16:41:11.589672421 +0300
+diff -ruN linux-vanilla-4.9.86/arch/powerpc/platforms/44x/Makefile linux-4.9.86/arch/powerpc/platforms/44x/Makefile
+--- linux-vanilla-4.9.86/arch/powerpc/platforms/44x/Makefile	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/arch/powerpc/platforms/44x/Makefile	2018-03-05 10:25:56.733609992 -0600
 @@ -10,5 +10,6 @@
  obj-$(CONFIG_XILINX_ML510) += virtex_ml510.o
  obj-$(CONFIG_ISS4xx)	+= iss4xx.o
@@ -87,9 +87,9 @@ diff -urN linux-4.0.1/arch/powerpc/platforms/44x/Makefile linux-4.0.1-wd1/arch/p
 +obj-$(CONFIG_APOLLO3G)   += apollo3g-gpio.o
  obj-$(CONFIG_CURRITUCK)	+= ppc476.o
  obj-$(CONFIG_AKEBONO)	+= ppc476.o
-diff -urN linux-4.0.1/drivers/ata/sata_dwc_pmp.c linux-4.0.1-wd1/drivers/ata/sata_dwc_pmp.c
---- linux-4.0.1/drivers/ata/sata_dwc_pmp.c	2015-05-07 12:42:04.240055386 +0300
-+++ linux-4.0.1-wd1/drivers/ata/sata_dwc_pmp.c	2015-05-07 12:00:23.792730609 +0300
+diff -ruN linux-vanilla-4.9.86/drivers/ata/sata_dwc_pmp.c linux-4.9.86/drivers/ata/sata_dwc_pmp.c
+--- linux-vanilla-4.9.86/drivers/ata/sata_dwc_pmp.c	2018-03-05 10:25:36.296703526 -0600
++++ linux-4.9.86/drivers/ata/sata_dwc_pmp.c	2018-03-05 10:25:56.733609992 -0600
 @@ -109,7 +109,7 @@
  #define AHB_DMA_BRST_DFLT		64	/* 16 data items burst length */
  #endif
@@ -126,9 +126,9 @@ diff -urN linux-4.0.1/drivers/ata/sata_dwc_pmp.c linux-4.0.1-wd1/drivers/ata/sat
  	signal_hdd_led(0 /*off blink*/, -1 /* no color */);
  #endif
  	return IRQ_RETVAL(handled);
-diff -urN linux-4.0.1/drivers/leds/led-class-3g.c linux-4.0.1-wd1/drivers/leds/led-class-3g.c
---- linux-4.0.1/drivers/leds/led-class-3g.c	1970-01-01 03:00:00.000000000 +0300
-+++ linux-4.0.1-wd1/drivers/leds/led-class-3g.c	2015-05-02 18:05:45.450268511 +0300
+diff -ruN linux-vanilla-4.9.86/drivers/leds/led-class-3g.c linux-4.9.86/drivers/leds/led-class-3g.c
+--- linux-vanilla-4.9.86/drivers/leds/led-class-3g.c	1969-12-31 18:00:00.000000000 -0600
++++ linux-4.9.86/drivers/leds/led-class-3g.c	2018-03-05 10:25:56.737610068 -0600
 @@ -0,0 +1,521 @@
 +/*
 + * LED Class Core
@@ -651,9 +651,9 @@ diff -urN linux-4.0.1/drivers/leds/led-class-3g.c linux-4.0.1-wd1/drivers/leds/l
 +MODULE_AUTHOR("John Lenz, Richard Purdie");
 +MODULE_LICENSE("GPL");
 +MODULE_DESCRIPTION("LED Class Interface");
-diff -urN linux-4.0.1/drivers/leds/leds-apollo3g.c linux-4.0.1-wd1/drivers/leds/leds-apollo3g.c
---- linux-4.0.1/drivers/leds/leds-apollo3g.c	1970-01-01 03:00:00.000000000 +0300
-+++ linux-4.0.1-wd1/drivers/leds/leds-apollo3g.c	2015-05-02 17:47:28.570474857 +0300
+diff -ruN linux-vanilla-4.9.86/drivers/leds/leds-apollo3g.c linux-4.9.86/drivers/leds/leds-apollo3g.c
+--- linux-vanilla-4.9.86/drivers/leds/leds-apollo3g.c	1969-12-31 18:00:00.000000000 -0600
++++ linux-4.9.86/drivers/leds/leds-apollo3g.c	2018-03-05 10:25:56.737610068 -0600
 @@ -0,0 +1,343 @@
 +/*
 + * LED Platform driver for Apollo3G board.
@@ -998,10 +998,10 @@ diff -urN linux-4.0.1/drivers/leds/leds-apollo3g.c linux-4.0.1-wd1/drivers/leds/
 +MODULE_AUTHOR("Hai Le <hai.le@wdc.com>");
 +MODULE_DESCRIPTION("Apollo3G LED driver");
 +MODULE_LICENSE("GPL");
-diff -urN linux-4.0.1/drivers/leds/leds.h linux-4.0.1-wd1/drivers/leds/leds.h
---- linux-4.0.1/drivers/leds/leds.h	2015-04-29 11:22:30.000000000 +0300
-+++ linux-4.0.1-wd1/drivers/leds/leds.h	2015-05-02 17:25:24.121533341 +0300
-@@ -17,6 +17,24 @@
+diff -ruN linux-vanilla-4.9.86/drivers/leds/leds.h linux-4.9.86/drivers/leds/leds.h
+--- linux-vanilla-4.9.86/drivers/leds/leds.h	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/drivers/leds/leds.h	2018-03-05 10:25:56.737610068 -0600
+@@ -16,6 +16,24 @@
  #include <linux/rwsem.h>
  #include <linux/leds.h>
  
@@ -1026,12 +1026,12 @@ diff -urN linux-4.0.1/drivers/leds/leds.h linux-4.0.1-wd1/drivers/leds/leds.h
  static inline int led_get_brightness(struct led_classdev *led_cdev)
  {
  	return led_cdev->brightness;
-diff -urN linux-4.0.1/drivers/leds/Makefile linux-4.0.1-wd1/drivers/leds/Makefile
---- linux-4.0.1/drivers/leds/Makefile	2015-04-29 11:22:30.000000000 +0300
-+++ linux-4.0.1-wd1/drivers/leds/Makefile	2015-05-02 18:02:03.653086669 +0300
-@@ -59,6 +59,9 @@
- obj-$(CONFIG_LEDS_VERSATILE)		+= leds-versatile.o
- obj-$(CONFIG_LEDS_MENF21BMC)		+= leds-menf21bmc.o
+diff -ruN linux-vanilla-4.9.86/drivers/leds/Makefile linux-4.9.86/drivers/leds/Makefile
+--- linux-vanilla-4.9.86/drivers/leds/Makefile	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/drivers/leds/Makefile	2018-03-05 10:25:56.737610068 -0600
+@@ -72,6 +72,9 @@
+ obj-$(CONFIG_LEDS_PM8058)		+= leds-pm8058.o
+ obj-$(CONFIG_LEDS_MLXCPLD)		+= leds-mlxcpld.o
  
 +obj-$(CONFIG_APOLLO3G)			+= led-class-3g.o
 +obj-$(CONFIG_APOLLO3G)			+= leds-apollo3g.o
@@ -1039,10 +1039,10 @@ diff -urN linux-4.0.1/drivers/leds/Makefile linux-4.0.1-wd1/drivers/leds/Makefil
  # LED SPI Drivers
  obj-$(CONFIG_LEDS_DAC124S085)		+= leds-dac124s085.o
  
-diff -urN linux-4.0.1/include/linux/leds.h linux-4.0.1-wd1/include/linux/leds.h
---- linux-4.0.1/include/linux/leds.h	2015-04-29 11:22:30.000000000 +0300
-+++ linux-4.0.1-wd1/include/linux/leds.h	2015-05-02 17:35:27.099690732 +0300
-@@ -26,6 +26,17 @@
+diff -ruN linux-vanilla-4.9.86/include/linux/leds.h linux-4.9.86/include/linux/leds.h
+--- linux-vanilla-4.9.86/include/linux/leds.h	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/include/linux/leds.h	2018-03-05 10:25:56.737610068 -0600
+@@ -27,6 +27,17 @@
  
  enum led_brightness {
  	LED_OFF		= 0,
@@ -1060,7 +1060,7 @@ diff -urN linux-4.0.1/include/linux/leds.h linux-4.0.1-wd1/include/linux/leds.h
  	LED_HALF	= 127,
  	LED_FULL	= 255,
  };
-@@ -36,6 +47,9 @@
+@@ -37,6 +48,9 @@
  	enum led_brightness	 max_brightness;
  	int			 flags;
  
@@ -1069,8 +1069,8 @@ diff -urN linux-4.0.1/include/linux/leds.h linux-4.0.1-wd1/include/linux/leds.h
 +
  	/* Lower 16 bits reflect status */
  #define LED_SUSPENDED		(1 << 0)
- 	/* Upper 16 bits reflect control information */
-@@ -63,6 +77,13 @@
+ #define LED_UNREGISTERING	(1 << 1)
+@@ -53,6 +67,13 @@
  #define LED_HW_PLUGGABLE	(1 << 25)
  #define LED_PANIC_INDICATOR	(1 << 26)
  
@@ -1084,7 +1084,7 @@ diff -urN linux-4.0.1/include/linux/leds.h linux-4.0.1-wd1/include/linux/leds.h
  	/* Set LED brightness level
  	 * Must not sleep. Use brightness_set_blocking for drivers
  	 * that can sleep while setting brightness.
-@@ -74,6 +95,11 @@
+@@ -80,6 +101,11 @@
  				     unsigned long *delay_on,
  				     unsigned long *delay_off);
  

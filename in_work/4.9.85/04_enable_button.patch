@@ -647,9 +647,9 @@ diff -urN linux-4.0.1/drivers/input/misc/a3g_button.c linux-4.0.1-wd1/drivers/in
 +MODULE_DESCRIPTION("Support for reset button on Apollo3G board");
 +MODULE_ALIAS("platform:" DRV_NAME);
 diff -urN linux-4.0.1/drivers/input/misc/Makefile linux-4.0.1-wd1/drivers/input/misc/Makefile
---- linux-4.0.1/drivers/input/misc/Makefile	2015-04-29 11:22:30.000000000 +0300
-+++ linux-4.0.1-wd1/drivers/input/misc/Makefile	2015-05-02 17:04:04.399816995 +0300
-@@ -72,3 +72,4 @@
+--- linux-vanilla-4.9.86/drivers/input/misc/Makefile	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/drivers/input/misc/Makefile	2018-03-05 11:15:05.922816360 -0600
+@@ -78,3 +78,4 @@
  obj-$(CONFIG_INPUT_XEN_KBDDEV_FRONTEND)	+= xen-kbdfront.o
  obj-$(CONFIG_INPUT_YEALINK)		+= yealink.o
  obj-$(CONFIG_INPUT_IDEAPAD_SLIDEBAR)	+= ideapad_slidebar.o

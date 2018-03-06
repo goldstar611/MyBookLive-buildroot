@@ -1,29 +1,6 @@
-From 173d2f47f7b7e862d5ebe22cc909d8eea5effe9d Mon Sep 17 00:00:00 2001
-From: root <root@Mac.WeTube>
-Date: Thu, 16 Apr 2015 01:44:51 +0800
-Subject: [PATCH] sata initially working now.
-
-Just a little bit slow, dd shows write above 20MB/s
-and read above 30MB/s using 4KB page size, about half of the old kernel.
-When use 16KB page size, it is as fast as old ones!
----
- arch/powerpc/boot/dts/apollo3g.dts               |  453 ++++
- arch/powerpc/configs/44x/apollo_3G_nas_defconfig |   66 +
- arch/powerpc/platforms/44x/Kconfig               |   11 +
- arch/powerpc/platforms/44x/ppc44x_simple.c       |    1 +
- drivers/ata/Kconfig                              |   12 +-
- drivers/ata/Makefile                             |    1 +
- drivers/ata/sata_dwc_pmp.c                       | 3046 ++++++++++++++++++++++
- 7 files changed, 3589 insertions(+), 1 deletion(-)
- create mode 100644 arch/powerpc/boot/dts/apollo3g.dts
- create mode 100644 arch/powerpc/configs/44x/apollo_3G_nas_defconfig
- create mode 100644 drivers/ata/sata_dwc_pmp.c
-
-diff --git a/arch/powerpc/boot/dts/apollo3g.dts b/arch/powerpc/boot/dts/apollo3g.dts
-new file mode 100644
-index 0000000..1b0fee8
---- /dev/null
-+++ b/arch/powerpc/boot/dts/apollo3g.dts
+diff -ruN linux-vanilla-4.9.86/arch/powerpc/boot/dts/apollo3g.dts linux-4.9.86/arch/powerpc/boot/dts/apollo3g.dts
+--- linux-vanilla-4.9.86/arch/powerpc/boot/dts/apollo3g.dts	1969-12-31 18:00:00.000000000 -0600
++++ linux-4.9.86/arch/powerpc/boot/dts/apollo3g.dts	2018-03-05 10:23:37.774612164 -0600
 @@ -0,0 +1,453 @@
 +/*
 + * Device Tree Source for AMCC Canyonlands (460EX)
@@ -478,11 +455,9 @@ index 0000000..1b0fee8
 +
 +	};
 +};
-diff --git a/arch/powerpc/configs/44x/apollo_3G_nas_defconfig b/arch/powerpc/configs/44x/apollo_3G_nas_defconfig
-new file mode 100644
-index 0000000..ebb4431
---- /dev/null
-+++ b/arch/powerpc/configs/44x/apollo_3G_nas_defconfig
+diff -ruN linux-vanilla-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig linux-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig
+--- linux-vanilla-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig	1969-12-31 18:00:00.000000000 -0600
++++ linux-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig	2018-03-05 10:23:37.774612164 -0600
 @@ -0,0 +1,66 @@
 +CONFIG_44x=y
 +CONFIG_SYSVIPC=y
@@ -550,11 +525,10 @@ index 0000000..ebb4431
 +CONFIG_BLK_DEV_SD=y
 +CONFIG_ATA=y
 +CONFIG_MODULES=y
-diff --git a/arch/powerpc/platforms/44x/Kconfig b/arch/powerpc/platforms/44x/Kconfig
-index 5538e57..36f0357 100644
---- a/arch/powerpc/platforms/44x/Kconfig
-+++ b/arch/powerpc/platforms/44x/Kconfig
-@@ -30,6 +30,17 @@ config BLUESTONE
+diff -ruN linux-vanilla-4.9.86/arch/powerpc/platforms/44x/Kconfig linux-4.9.86/arch/powerpc/platforms/44x/Kconfig
+--- linux-vanilla-4.9.86/arch/powerpc/platforms/44x/Kconfig	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/arch/powerpc/platforms/44x/Kconfig	2018-03-05 10:23:37.774612164 -0600
+@@ -30,6 +30,17 @@
  	help
  	  This option enables support for the APM APM821xx Evaluation board.
  
@@ -572,11 +546,10 @@ index 5538e57..36f0357 100644
  config EBONY
  	bool "Ebony"
  	depends on 44x
-diff --git a/arch/powerpc/platforms/44x/ppc44x_simple.c b/arch/powerpc/platforms/44x/ppc44x_simple.c
-index 573c3d2..c4f2643 100644
---- a/arch/powerpc/platforms/44x/ppc44x_simple.c
-+++ b/arch/powerpc/platforms/44x/ppc44x_simple.c
-@@ -53,6 +53,7 @@ static char *board[] __initdata = {
+diff -ruN linux-vanilla-4.9.86/arch/powerpc/platforms/44x/ppc44x_simple.c linux-4.9.86/arch/powerpc/platforms/44x/ppc44x_simple.c
+--- linux-vanilla-4.9.86/arch/powerpc/platforms/44x/ppc44x_simple.c	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/arch/powerpc/platforms/44x/ppc44x_simple.c	2018-03-05 10:23:37.774612164 -0600
+@@ -53,6 +53,7 @@
  	"amcc,arches",
  	"amcc,bamboo",
  	"apm,bluestone",
@@ -584,13 +557,12 @@ index 573c3d2..c4f2643 100644
  	"amcc,glacier",
  	"ibm,ebony",
  	"amcc,eiger",
-diff --git a/drivers/ata/Kconfig b/drivers/ata/Kconfig
-index 5f60155..91d3321 100644
---- a/drivers/ata/Kconfig
-+++ b/drivers/ata/Kconfig
-@@ -276,9 +276,19 @@ config SATA_DWC
- 
- 	  If unsure, say N.
+diff -ruN linux-vanilla-4.9.86/drivers/ata/Kconfig linux-4.9.86/drivers/ata/Kconfig
+--- linux-vanilla-4.9.86/drivers/ata/Kconfig	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/drivers/ata/Kconfig	2018-03-05 10:23:37.774612164 -0600
+@@ -331,9 +331,19 @@
+ 	  This option enables support for old device trees without the
+ 	  "dmas" property.
  
 +config SATA_DWC_PMP
 +    tristate "DesignWare Cores SATA with PMP support"
@@ -609,23 +581,20 @@ index 5f60155..91d3321 100644
  	help
  	  This option enables debugging output in the driver.
  
-diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
-index ae41107..6075773 100644
---- a/drivers/ata/Makefile
-+++ b/drivers/ata/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_SATA_FSL)		+= sata_fsl.o
+diff -ruN linux-vanilla-4.9.86/drivers/ata/Makefile linux-4.9.86/drivers/ata/Makefile
+--- linux-vanilla-4.9.86/drivers/ata/Makefile	2018-03-03 03:23:29.000000000 -0600
++++ linux-4.9.86/drivers/ata/Makefile	2018-03-05 10:23:37.774612164 -0600
+@@ -10,6 +10,7 @@
  obj-$(CONFIG_SATA_INIC162X)	+= sata_inic162x.o
  obj-$(CONFIG_SATA_SIL24)	+= sata_sil24.o
  obj-$(CONFIG_SATA_DWC)		+= sata_dwc_460ex.o
 +obj-$(CONFIG_SATA_DWC_PMP)	+= sata_dwc_pmp.o
  obj-$(CONFIG_SATA_HIGHBANK)	+= sata_highbank.o libahci.o
- obj-$(CONFIG_AHCI_DA850)	+= ahci_da850.o libahci.o libahci_platform.o
- obj-$(CONFIG_AHCI_IMX)		+= ahci_imx.o libahci.o libahci_platform.o
-diff --git a/drivers/ata/sata_dwc_pmp.c b/drivers/ata/sata_dwc_pmp.c
-new file mode 100644
-index 0000000..0a3dd90
---- /dev/null
-+++ b/drivers/ata/sata_dwc_pmp.c
+ obj-$(CONFIG_AHCI_BRCM)		+= ahci_brcm.o libahci.o libahci_platform.o
+ obj-$(CONFIG_AHCI_CEVA)		+= ahci_ceva.o libahci.o libahci_platform.o
+diff -ruN linux-vanilla-4.9.86/drivers/ata/sata_dwc_pmp.c linux-4.9.86/drivers/ata/sata_dwc_pmp.c
+--- linux-vanilla-4.9.86/drivers/ata/sata_dwc_pmp.c	1969-12-31 18:00:00.000000000 -0600
++++ linux-4.9.86/drivers/ata/sata_dwc_pmp.c	2018-03-05 10:23:37.778612408 -0600
 @@ -0,0 +1,3046 @@
 +/*
 + * drivers/ata/sata_dwc.c
@@ -3673,6 +3642,3 @@ index 0000000..0a3dd90
 +MODULE_AUTHOR("Mark Miesfeld <mmiesfeld@amcc.com>");
 +MODULE_DESCRIPTION("DesignWare Cores SATA controller driver");
 +MODULE_VERSION(DRV_VERSION);
--- 
-2.1.4
-

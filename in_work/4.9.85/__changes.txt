@@ -5,4 +5,3 @@ fix pte_frag error
 https://lists.ozlabs.org/pipermail/linuxppc-dev/2017-September/164096.html
 
 fix leds.h failed hunk patch error
-TODO: from patch-utils, use rediff to fix up offsets
