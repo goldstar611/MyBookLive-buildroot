@@ -6,7 +6,7 @@ The latest WD My Book Live GPL Source Code can be found at https://support.wdc.c
 
     # Install some dependencies to get started (taken from sample vagrant file)
     sudo apt update
-    sudo apt install build-essential libncurses5-dev git libc6:i386 unzip bc
+    sudo apt install build-essential libncurses5-dev git libc6:i386 unzip bc libelf-dev
 
     # Clone the master buildroot and MyBookLive-buildroot repos
     git clone https://github.com/buildroot/buildroot.git
