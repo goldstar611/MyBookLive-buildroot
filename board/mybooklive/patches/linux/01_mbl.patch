@@ -483,7 +483,7 @@ new file mode 100644
 index 0000000..ebb4431
 --- /dev/null
 +++ b/arch/powerpc/configs/44x/apollo_3G_nas_defconfig
-@@ -0,0 +1,66 @@
+@@ -0,0 +1,67 @@
 +CONFIG_44x=y
 +CONFIG_SYSVIPC=y
 +CONFIG_POSIX_MQUEUE=y
@@ -516,6 +516,7 @@ index 0000000..ebb4431
 +CONFIG_BLK_DEV_RAM=y
 +CONFIG_BLK_DEV_RAM_SIZE=35000
 +CONFIG_NETDEVICES=y
++CONFIG_TUN=y
 +CONFIG_IBM_EMAC=y
 +CONFIG_IBM_EMAC_RXB=256
 +CONFIG_IBM_EMAC_TXB=256

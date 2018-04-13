@@ -458,7 +458,7 @@ diff -ruN linux-vanilla-4.9.86/arch/powerpc/boot/dts/apollo3g.dts linux-4.9.86/a
 diff -ruN linux-vanilla-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig linux-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig
 --- linux-vanilla-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig	1969-12-31 18:00:00.000000000 -0600
 +++ linux-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig	2018-03-05 10:23:37.774612164 -0600
-@@ -0,0 +1,66 @@
+@@ -0,0 +1,67 @@
 +CONFIG_44x=y
 +CONFIG_SYSVIPC=y
 +CONFIG_POSIX_MQUEUE=y
@@ -491,6 +491,7 @@ diff -ruN linux-vanilla-4.9.86/arch/powerpc/configs/44x/apollo_3G_nas_defconfig 
 +CONFIG_BLK_DEV_RAM=y
 +CONFIG_BLK_DEV_RAM_SIZE=35000
 +CONFIG_NETDEVICES=y
++CONFIG_TUN=y
 +CONFIG_IBM_EMAC=y
 +CONFIG_IBM_EMAC_RXB=256
 +CONFIG_IBM_EMAC_TXB=256
