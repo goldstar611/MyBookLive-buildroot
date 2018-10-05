@@ -1,7 +1,0 @@
-enum ata_tf_protocols to enum ata_prot_flags
-https://github.com/torvalds/linux/commit/dc34e7e1a701134c2639dc7af78dc91055616477
-
-fix pte_frag error
-https://lists.ozlabs.org/pipermail/linuxppc-dev/2017-September/164096.html
-
-fix leds.h failed hunk patch error
