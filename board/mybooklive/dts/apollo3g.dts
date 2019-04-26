@@ -133,6 +133,7 @@
 		gpios = <&GPIO1 3 GPIO_ACTIVE_LOW>;
 		regulator-min-microvolt = <12000000>;
 		regulator-max-microvolt = <12000000>;
+    enable-active-high;
 		regulator-always-on; /* needed to read OS from HDD */
 	};
 
@@ -142,6 +143,7 @@
 		gpios = <&GPIO1 7 GPIO_ACTIVE_LOW>;
 		regulator-min-microvolt = <12000000>;
 		regulator-max-microvolt = <12000000>;
+    enable-active-high;
 		regulator-always-on; /* needed to read OS from HDD */
 	};
 };
